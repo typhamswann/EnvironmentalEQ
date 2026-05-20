@@ -435,32 +435,21 @@ h5{
 
   .comp-img:hover .img-wrap::after,
   .comp-img:focus-visible .img-wrap::after {
-    background: rgba(0, 0, 0, 0.28);
+    background: rgba(0, 0, 0, 0.12);
   }
 
-  .hover-cta {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.88);
-    color: white;
-    padding: 0.55rem 1.1rem;
-    font-family: 'Roboto', 'Inter', sans-serif;
-    font-size: 0.85rem;
+  .caption-arrow {
+    display: inline-block;
+    margin-left: 0.4rem;
+    color: #999;
     font-weight: 400;
-    border-radius: 3px;
-    opacity: 0;
-    transition: opacity 0.18s ease;
-    pointer-events: none;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-    line-height: 1;
+    transition: color 0.15s ease, transform 0.15s ease;
   }
 
-  .comp-img:hover .hover-cta,
-  .comp-img:focus-visible .hover-cta {
-    opacity: 1;
+  .comp-img:hover .caption-arrow,
+  .comp-img:focus-visible .caption-arrow {
+    color: #333;
+    transform: translateX(3px);
   }
   
 
