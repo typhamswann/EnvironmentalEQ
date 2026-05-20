@@ -353,7 +353,11 @@ h5{
     height:100%;
     width:100%;
     z-index: 999;
-    background: url(background.png) no-repeat center center fixed; 
+    background-color: #ece6d6;
+    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -363,7 +367,7 @@ h5{
 
 
   #main{
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.97);
     text-align:center;
     margin-left:10vw;
     margin-right:10vw;
@@ -394,10 +398,23 @@ h5{
   
   .img {
     width: 17rem;
+    height: auto;
+    aspect-ratio: 1650 / 918;
+    display: block;
   }
 
   .images {
     text-align: center;
+  }
+
+  /* Coordinated fade-in: cover images stay hidden until all four are decoded,
+     then fade in together. Avoids the staggered "flash on" as each JPEG lands. */
+  .comp-img {
+    opacity: 0;
+    transition: opacity 0.45s ease, transform 0.18s ease;
+  }
+  body.images-ready .comp-img {
+    opacity: 1;
   }
 
   .caption {

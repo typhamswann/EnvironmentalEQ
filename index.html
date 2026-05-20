@@ -1,3 +1,8 @@
+<link rel="preload" as="image" href="background.png">
+<link rel="preload" as="image" href="sf-housing.jpg">
+<link rel="preload" as="image" href="miami-asthma.jpg">
+<link rel="preload" as="image" href="nyc-superfund.jpg">
+<link rel="preload" as="image" href="la-heat.jpg">
 <link href="styles.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;900&display=swap" rel="stylesheet">
@@ -23,14 +28,14 @@
     <div class="images">
       <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('3soc-econ','house_value',-122.34,37.74,11.0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="img-wrap">
-          <img class="img" src="sf-housing.jpg" />
+          <img class="img" src="sf-housing.jpg" width="1650" height="918" decoding="async" alt="" />
           <span class="card-pill" aria-hidden="true">Open<svg class="card-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg></span>
         </div>
         <div class="caption">Housing Cost in the SF Bay Area, CA</div>
       </div>
       <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('4pub-health','asthma',-80.28,25.85,10.5)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="img-wrap">
-          <img class="img" src="miami-asthma.jpg" />
+          <img class="img" src="miami-asthma.jpg" width="1652" height="920" decoding="async" alt="" />
           <span class="card-pill" aria-hidden="true">Open<svg class="card-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg></span>
         </div>
         <div class="caption">Asthma Rate in Miami, FL</div>
@@ -39,14 +44,14 @@
     <div class="images">
       <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('2env-health','superfund_proximity',-74.00,40.73,11.15)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="img-wrap">
-          <img class="img" src="nyc-superfund.jpg" />
+          <img class="img" src="nyc-superfund.jpg" width="1650" height="918" decoding="async" alt="" />
           <span class="card-pill" aria-hidden="true">Open<svg class="card-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg></span>
         </div>
         <div class="caption">Superfund Site Proximity in New York City, NY</div>
       </div>
       <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('2env-health','heat',-117.95,34.05,9.4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="img-wrap">
-          <img class="img" src="la-heat.jpg" />
+          <img class="img" src="la-heat.jpg" width="1644" height="924" decoding="async" alt="" />
           <span class="card-pill" aria-hidden="true">Open<svg class="card-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/></svg></span>
         </div>
         <div class="caption">Urban Heat Effect in Los Angeles, CA</div>
@@ -1158,6 +1163,41 @@
     <p id="share" class="bottom-link"><a class="hide" target="_blank" href="site-template/index.html#four">Share</a></p>
     <p id="contact" class="bottom-link"><a class="hide" target="_blank" href="site-template/index.html#two">Methods</a></p>
 </div>
+<script>
+// Hold the cover images at opacity 0 until all four have finished decoding,
+// then add `images-ready` to fade them in together. Stops the staggered
+// "flash on" as each JPEG arrives and prevents layout shift on cold loads.
+(function () {
+  function whenAllImagesReady() {
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.comp-img .img'));
+    if (imgs.length === 0) {
+      document.body.classList.add('images-ready');
+      return;
+    }
+    var promises = imgs.map(function (img) {
+      if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+      return new Promise(function (resolve) {
+        img.addEventListener('load', resolve, { once: true });
+        img.addEventListener('error', resolve, { once: true });
+      });
+    });
+    Promise.all(promises).then(function () {
+      // Use decode() on each to ensure pixels are ready before fade-in.
+      var decodes = imgs.map(function (img) {
+        return img.decode ? img.decode().catch(function () {}) : Promise.resolve();
+      });
+      Promise.all(decodes).then(function () {
+        document.body.classList.add('images-ready');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', whenAllImagesReady);
+  } else {
+    whenAllImagesReady();
+  }
+})();
+</script>
 <script src="scripts.js"></script>
 <script>
 function showAtlasView(section, layerKey, lng, lat, zoom){
