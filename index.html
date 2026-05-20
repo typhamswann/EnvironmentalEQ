@@ -23,20 +23,24 @@
       <div class="comp-img">
         <img class="img" src="sf-housing.jpg" />
         <div class="caption">Housing Cost in the SF Bay Area, CA</div>
+        <button class="card-cta" onclick="showAtlasView('3soc-econ','house_value',-122.34,37.74,11.0)">Open this view</button>
       </div>
       <div class="comp-img">
         <img class="img" src="miami-asthma.jpg" />
         <div class="caption">Asthma Rate in Miami, FL</div>
+        <button class="card-cta" onclick="showAtlasView('4pub-health','asthma',-80.28,25.85,10.5)">Open this view</button>
       </div>
     </div>
     <div class="images">
       <div class="comp-img">
         <img class="img" src="nyc-superfund.jpg" />
         <div class="caption">Superfund Site Proximity in New York City, NY</div>
+        <button class="card-cta" onclick="showAtlasView('2env-health','superfund_proximity',-74.00,40.73,11.15)">Open this view</button>
       </div>
       <div class="comp-img">
         <img class="img" src="la-heat.jpg" />
         <div class="caption">Urban Heat Effect in Los Angeles, CA</div>
+        <button class="card-cta" onclick="showAtlasView('2env-health','heat',-117.95,34.05,9.4)">Open this view</button>
       </div>
     </div>
     
@@ -1146,6 +1150,35 @@
     <p id="contact" class="bottom-link"><a class="hide" target="_blank" href="site-template/index.html#two">Methods</a></p>
 </div>
 <script src="scripts.js"></script>
+<script>
+function showAtlasView(section, layerKey, lng, lat, zoom){
+  document.getElementById('cover').style.display = 'none';
+  var dd = document.getElementById('dropdown-menu');
+  if (dd) {
+    for (var i = 0; i < dd.options.length; i++) {
+      if (dd.options[i].value === section) { dd.selectedIndex = i; break; }
+    }
+    if (typeof switchDiv === 'function') switchDiv();
+  }
+  var sectionDiv = document.getElementById(section);
+  if (sectionDiv) {
+    var radios = sectionDiv.querySelectorAll('input[type="radio"]');
+    for (var j = 0; j < radios.length; j++) {
+      var oc = radios[j].getAttribute('onclick') || '';
+      if (oc.indexOf("'" + layerKey + "'") !== -1) {
+        var allRadios = document.getElementsByName('radio');
+        for (var k = 0; k < allRadios.length; k++) allRadios[k].checked = false;
+        radios[j].checked = true;
+        break;
+      }
+    }
+  }
+  if (typeof layers_dict !== 'undefined' && layers_dict[layerKey] && typeof colorSwitch === 'function') {
+    colorSwitch(layers_dict[layerKey]);
+  }
+  if (typeof map !== 'undefined' && map) map.jumpTo({ center: [lng, lat], zoom: zoom });
+}
+</script>
 </div>
 
 </html>
