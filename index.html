@@ -20,27 +20,35 @@
     <h1 id="title-main">EnvironmentalEQ</h1>
 
     <div class="images">
-      <div class="comp-img">
-        <img class="img" src="sf-housing.jpg" />
+      <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('3soc-econ','house_value',-122.34,37.74,11.0)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+        <div class="img-wrap">
+          <img class="img" src="sf-housing.jpg" />
+          <span class="hover-cta">Open this view</span>
+        </div>
         <div class="caption">Housing Cost in the SF Bay Area, CA</div>
-        <button class="card-cta" onclick="showAtlasView('3soc-econ','house_value',-122.34,37.74,11.0)">Open this view</button>
       </div>
-      <div class="comp-img">
-        <img class="img" src="miami-asthma.jpg" />
+      <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('4pub-health','asthma',-80.28,25.85,10.5)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+        <div class="img-wrap">
+          <img class="img" src="miami-asthma.jpg" />
+          <span class="hover-cta">Open this view</span>
+        </div>
         <div class="caption">Asthma Rate in Miami, FL</div>
-        <button class="card-cta" onclick="showAtlasView('4pub-health','asthma',-80.28,25.85,10.5)">Open this view</button>
       </div>
     </div>
     <div class="images">
-      <div class="comp-img">
-        <img class="img" src="nyc-superfund.jpg" />
+      <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('2env-health','superfund_proximity',-74.00,40.73,11.15)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+        <div class="img-wrap">
+          <img class="img" src="nyc-superfund.jpg" />
+          <span class="hover-cta">Open this view</span>
+        </div>
         <div class="caption">Superfund Site Proximity in New York City, NY</div>
-        <button class="card-cta" onclick="showAtlasView('2env-health','superfund_proximity',-74.00,40.73,11.15)">Open this view</button>
       </div>
-      <div class="comp-img">
-        <img class="img" src="la-heat.jpg" />
+      <div class="comp-img" role="button" tabindex="0" onclick="showAtlasView('2env-health','heat',-117.95,34.05,9.4)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+        <div class="img-wrap">
+          <img class="img" src="la-heat.jpg" />
+          <span class="hover-cta">Open this view</span>
+        </div>
         <div class="caption">Urban Heat Effect in Los Angeles, CA</div>
-        <button class="card-cta" onclick="showAtlasView('2env-health','heat',-117.95,34.05,9.4)">Open this view</button>
       </div>
     </div>
     
