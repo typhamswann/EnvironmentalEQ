@@ -438,18 +438,43 @@ h5{
     background: rgba(0, 0, 0, 0.12);
   }
 
-  .caption-arrow {
-    display: inline-block;
-    margin-left: 0.4rem;
-    color: #999;
-    font-weight: 400;
-    transition: color 0.15s ease, transform 0.15s ease;
+  .card-pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(0, 0, 0, 0.78);
+    color: white;
+    padding: 0.32rem 0.7rem 0.32rem 0.75rem;
+    font-family: 'Roboto', 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    border-radius: 999px;
+    pointer-events: none;
+    transition: background 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   }
 
-  .comp-img:hover .caption-arrow,
-  .comp-img:focus-visible .caption-arrow {
-    color: #333;
-    transform: translateX(3px);
+  .card-pill-icon {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    color: white;
+    opacity: 0.85;
+  }
+
+  .comp-img:hover .card-pill,
+  .comp-img:focus-visible .card-pill {
+    background: black;
+  }
+
+  .comp-img:hover .card-pill-icon,
+  .comp-img:focus-visible .card-pill-icon {
+    opacity: 1;
   }
   
 
